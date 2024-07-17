@@ -1,4 +1,4 @@
-# duckdb-in-ojs
+# Fork of `duckdb-in-ojs` for Reprex Purposes
 
 This is a fork of [Bob Rudis's Example of using DuckDB in Quarto OJS blocks](https://github.com/hrbrmstr/duckdb-in-ojs). It's reorganized as a quarto dashboard with some value boxes to show a relatively weird bug in quarto dashboards whenever a table is rendered with Observable's `Inputs.table()`. The core issue is that whenever row height is explicitly set in the quarto dashboard, it prohibits the table rendered with `Inputs.table()` from scrolling. If Row height isn't set, the table scrolls as expected.
 
