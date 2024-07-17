@@ -1,0 +1,82 @@
+---
+title: "DuckDB In OJS BLOCKS! (Without Row Height Set)"
+author: "boB Rudis"
+format: dashboard
+---
+
+## Section 
+
+## Row
+
+```{ojs}
+//| output: false
+//| eval: true
+db = DuckDBClient.of({ 
+	impacts: await FileAttachment("earth-impact-craters.csv").csv(),
+	migration: await FileAttachment("migration.csv").csv()
+})
+
+aus_impacts = db.sql`SELECT * FROM impacts`
+gua = db.sql`SELECT * FROM migration WHERE source = 'Guatemala' ORDER BY yearmon`
+
+```
+
+### Column
+
+```{ojs}
+//| component: valuebox
+//| title: "People"
+//| icon: people-fill
+//| color: light
+12
+```
+
+### Column
+
+```{ojs}
+//| component: valuebox
+//| title: "Organizations"
+//| icon: buildings-fill
+//| color: light
+200
+```
+
+### Column
+
+```{ojs}
+//| component: valuebox
+//| title: "Issues"
+//| icon: stack
+//| color: light
+31
+```
+
+## Row
+
+### Column
+
+```{ojs}
+//| output: true
+Inputs.table(aus_impacts)
+```
+
+### Column
+
+```{ojs}
+//| output: true
+Plot.plot({
+  grid: true,
+  marginLeft: 60,
+  marks: [
+    Plot.ruleY([0]),
+    Plot.lineY(gua.map(d => { // this won't be necessary soon 
+			d.yearmon = new Date(d.yearmon);
+			d.n = +d.n;
+			return(d)
+		}), {
+      x: "yearmon",
+      y: "n"
+    }),
+	]
+})
+```
