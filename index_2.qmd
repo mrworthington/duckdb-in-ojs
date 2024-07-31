@@ -1,7 +1,10 @@
 ---
 title: "DuckDB In OJS BLOCKS! (With Row Height Set)"
 author: "boB Rudis"
-format: dashboard
+format: 
+  dashboard:
+    scrolling: false
+    orientation: columns
 ---
 
 ## Section 
